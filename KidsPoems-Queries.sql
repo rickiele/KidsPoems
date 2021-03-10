@@ -162,8 +162,9 @@ GROUP BY emo.Name
 HAVING emo.Name IS NOT NULL
 ORDER BY LeastEmotion;
 */
--- 19) Which grade has the largest number of poems with an emotion of joy?
-SELECT TOP 1 COUNT(Poem.Id) as PoemsOfJoy, Grade.Name, Emotion.Name
+-- 19) Which grade has the largest number of poems with an emotion of joy?\
+/*
+SELECT TOP 1 COUNT(Poem.Id) as Poems, Grade.Name, Emotion.Name
 	FROM Poem 
 	JOIN Author ON Poem.AuthorId = Author.Id
 	JOIN Grade ON Author.GradeId = Grade.Id
@@ -171,8 +172,17 @@ SELECT TOP 1 COUNT(Poem.Id) as PoemsOfJoy, Grade.Name, Emotion.Name
 	JOIN Emotion ON PoemEmotion.EmotionId = Emotion.Id
 GROUP BY Grade.Name, Emotion.Name
 HAVING Emotion.Name = 'Joy'
-ORDER BY PoemsOfJoy desc;
-
+ORDER BY Poems desc;
+*/
 -- 20) Which gender has the least number of poems with an emotion of fear?
-SELECT COUNT(p.ID) as PoemsOfFear
-	FROM Poem
+/*
+SELECT TOP 1 COUNT(p.ID) as PoemsOfFear, gen.Name, emo.Name 
+	FROM Poem p
+	JOIN Author au ON p.AuthorId = au.Id
+	JOIN Gender gen ON au.GenderId = gen.Id
+	JOIN PoemEmotion pe ON p.Id = pe.PoemId
+	JOIN Emotion emo ON pe.EmotionId = emo.Id
+GROUP BY gen.Name, emo.Name
+HAVING emo.Name = 'Fear'
+ORDER BY PoemsOfFear;
+*/
